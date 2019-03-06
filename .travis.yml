@@ -6,4 +6,4 @@ addons:
     token:
       secure: 6069cb5226f4c2ed71f477150dcb54cd33d21161
 script:
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=abhikomarla_sample_addressbook
+ - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=abhikomarla_sample-addressbook
