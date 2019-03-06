@@ -4,6 +4,6 @@ addons:
   sonarcloud:
     organization: "abhikomarla-github"
     token:
-      secure: ffa7780fb7a5e86afbd573a0c9fd1cad71e6b6e5
+      secure: 6069cb5226f4c2ed71f477150dcb54cd33d21161
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=abhikomarla_sample_addressbook
