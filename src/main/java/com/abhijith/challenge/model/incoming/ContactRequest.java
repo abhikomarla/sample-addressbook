@@ -1,4 +1,4 @@
-package com.abhijith.test.model.incoming;
+package com.abhijith.challenge.model.incoming;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

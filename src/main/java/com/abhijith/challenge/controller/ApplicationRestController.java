@@ -1,6 +1,6 @@
-package com.abhijith.test.controller;
+package com.abhijith.challenge.controller;
 
-import com.abhijith.test.model.incoming.ContactRequest;
+import com.abhijith.challenge.model.incoming.ContactRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
