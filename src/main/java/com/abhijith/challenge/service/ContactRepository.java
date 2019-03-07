@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface ContactRepository extends JpaRepository<Contact, Long>, ContactRepositoryCustom {
+public interface ContactRepository extends JpaRepository<Contact, String>, ContactRepositoryCustom {
 }

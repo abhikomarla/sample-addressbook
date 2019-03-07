@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity
-@Table(name = "ADDRESSBOOK")
+@Entity (name = "addressbook")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
 public class AddressBook implements Serializable {
 
     @Id
-    private Long id;
+    @Column (updatable = false, nullable = false)
+    private String id;
 
     @Column
     private String name;
@@ -35,7 +35,7 @@ public class AddressBook implements Serializable {
     @JoinColumn(name="CONTACT_ID")
     private List<Contact> contacts = new ArrayList<>();
 
-    public AddressBook(final Long id, final String name,
+    public AddressBook(final String id, final String name,
                        final String description) {
         this.id = id;
         this.name = name;

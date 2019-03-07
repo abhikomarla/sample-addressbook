@@ -13,8 +13,8 @@ public class SampleAddressBookApplication {
         ConfigurableApplicationContext context = SpringApplication.run(SampleAddressBookApplication.class, args);
 
         AddressBookRepository addressBookRepository = context.getBean(AddressBookRepository.class);
-        addressBookRepository.save(new AddressBook(1000L, "Business", "Business contacts"));
-        addressBookRepository.save(new AddressBook(1001L, "Personal", "Personal contacts"));
+        addressBookRepository.save(new AddressBook("1000", "Business", "Business contacts"));
+        addressBookRepository.save(new AddressBook("1001", "Personal", "Personal contacts"));
 
     }
 }
