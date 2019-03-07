@@ -13,4 +13,6 @@ public interface ContactRepositoryCustom {
     Contact findContactByIdAndAddressBook(final String addressBookId, final String contactId);
 
     void deleteContactByIdAndAddressBook(final String addressBookId, final String contactId);
+
+    boolean findIfDuplicatePresent(String addressBookId, String mobileNumber);
 }

@@ -14,9 +14,6 @@ import java.util.UUID;
 @Data
 @Entity(name = "contact")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
-@NamedNativeQuery(name = "Contact.getContactByIdAndAddressBook",
-        query = "SELECT * FROM CONTACT c "
-                + "WHERE c.addressBookId = ? AND c.id = ?", resultClass = Contact.class)
 public class Contact implements Serializable {
 
     public Contact() {

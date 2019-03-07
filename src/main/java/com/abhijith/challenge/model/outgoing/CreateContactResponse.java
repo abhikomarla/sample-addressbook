@@ -31,14 +31,9 @@ import java.util.UUID;
 @Data
 public class CreateContactResponse implements Serializable {
 
-
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty
-    private Integer status = HttpStatus.OK.value();
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty
-    private Integer code = HttpStatus.OK.value();
+    private Integer code = HttpStatus.CREATED.value();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty
