@@ -4,11 +4,10 @@ A sample address book application built using spring boot, h2 database and JPA.
 
 ### Getting started
 
-To compile the application, use command
+To compile the application, use command  
 mvn clean compile
 
-To run the application, use command
-
+To run the application, use command  
 mvn spring-boot:run
 
 ### Important assumptions
@@ -23,8 +22,8 @@ creation is not allowed.
 ### This Rest API exposes 5 Rest endpoints as below
 
 * PUT : /v1/address-books/{address-book-id}/contacts  
-    Create a contact record under an address book
     ```
+    Create a contact record under an address book
     Sample request: 
     {
         "correlationId": "8a7fb6a0-9d31-4e00-a66a-3c562439184e",
@@ -51,8 +50,8 @@ creation is not allowed.
     ```
 
 * GET : /v1/address-books/{address-book-id}/contacts/{contact-id}  
-    Retrieve a contact record under an address book 
     ```
+    Retrieve a contact record under an address book
     Sample response: 
     {
         "id": "d0765767-9d40-4342-9485-3a57a339a013",
@@ -65,8 +64,8 @@ creation is not allowed.
     ```
  
 * GET : /v1/address-books/{address-book-id}/contacts  
-    Retrieve all the contacts under an address book
     ```
+    Retrieve all the contacts under an address book
     Sample response
     [
         {
@@ -81,11 +80,13 @@ creation is not allowed.
     ```
 
 * DELETE : /v1/address-books/{address-book-id}/contacts/{contact-id}  
+    ```
     Delete a contact record under an address book
+    ```
 
 * GET :  /v1/address-books/unique-contacts  
-    Retrieve unique set of contact records across all the address books
     ```
+    Retrieve unique set of contact records across all the address books
     Sample response
     [
         {
