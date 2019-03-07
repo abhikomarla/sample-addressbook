@@ -4,23 +4,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
