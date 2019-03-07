@@ -13,8 +13,10 @@ mvn spring-boot:run
 
 ### Important assumptions
 * The creation of a contact record has been made to avoid duplicate insertions. A combination of address book id and 
-the mobile number is used to check if the combination already exists. If the combination exists, the creation is not 
-allowed.
+the mobile number is used to check if a record with same combination already exists. If the combination exists, the 
+creation is not allowed. 
+
+* "firstName" and "mobileNumber" attributes are mandatory while creating a new contact record.
 
 * At the start of the application 2 address book records are created in memory with identifiers 1000 and 1001 
 
@@ -27,9 +29,9 @@ allowed.
     {
         "correlationId": "8a7fb6a0-9d31-4e00-a66a-3c562439184e",
         "contact": {
-            "firstName": "Abhijith",
+            "firstName": "Abhijith", // mandatory
             "lastName": "Komarla",
-            "mobileNumber": "04*******",
+            "mobileNumber": "04*******", //mandatory
             "homePhone": "03*******", 
         }
     }
