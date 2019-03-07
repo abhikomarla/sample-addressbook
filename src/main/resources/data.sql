@@ -1,5 +1,3 @@
-insert into addressbook
-values('Ranga', 'E1234567');
+insert into addressbook values(10001, 'Ranga', 'E1234567');
 
-insert into student
-values('Ravi', 'A1234568');
+insert into addressbook values(10002, 'Ravi', 'A1234568');

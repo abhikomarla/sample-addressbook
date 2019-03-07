@@ -1,6 +1,9 @@
 package com.abhijith.challenge.controller;
 
+import com.abhijith.challenge.model.entity.Contact;
 import com.abhijith.challenge.model.incoming.ContactRequest;
+import com.abhijith.challenge.service.ContactRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApplicationRestController {
 
+    @Autowired
+    private ContactRepository contactRepository;
+
     @PutMapping(value = "/addressBooks/{addressBookId}/contacts", headers = "Accept=application/json")
     public ResponseEntity createContact(@PathVariable final String addressBookId,
                                         @NonNull @RequestBody final ContactRequest contact) {
@@ -23,7 +29,8 @@ public class ApplicationRestController {
     @GetMapping(value = "/addressBooks/{addressBookId}/contacts/{contactId}")
     public ResponseEntity getContact(@PathVariable final String addressBookId,
                                           @PathVariable final String contactId) {
-        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
+        Contact contact = contactRepository.getOne(10L);
+        return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
     @GetMapping(value = "/addressBooks/{addressBookId}/contacts")
