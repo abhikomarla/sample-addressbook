@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1/address-books")
 public class ApplicationRestController {
 
     @Autowired
@@ -28,33 +30,33 @@ public class ApplicationRestController {
     @Autowired
     private AddressBookOrchestrator addressBookOrchestrator;
 
-    @PutMapping(value = "/addressBooks/{addressBookId}/contacts", headers = "Accept=application/json")
+    @PutMapping(value = "/{addressBookId}/contacts", headers = "Accept=application/json")
     public ResponseEntity createContact(@PathVariable @NonNull @NotEmpty final String addressBookId,
                                         @NonNull @Valid @RequestBody final CreateContactRequest contact) {
         return addressBookOrchestrator.saveContact(addressBookId, contact);
     }
 
-    @GetMapping(value = "/addressBooks/{addressBookId}/contacts/{contactId}")
+    @GetMapping(value = "/{addressBookId}/contacts/{contactId}")
     public ResponseEntity getContact(@PathVariable final String addressBookId,
                                           @PathVariable final String contactId) {
         Contact contact = contactRepository.findContactByIdAndAddressBook(addressBookId, contactId);
         return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/addressBooks/{addressBookId}/contacts")
+    @GetMapping(value = "/{addressBookId}/contacts")
     public ResponseEntity getAllContacts(@PathVariable final String addressBookId) {
         List<Contact> contacts = contactRepository.findAllByAddressId(addressBookId);
         return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/addressBooks/{addressBookId}/contacts/{contactId}")
+    @DeleteMapping(value = "/{addressBookId}/contacts/{contactId}")
     public ResponseEntity deleteContact(@PathVariable final String addressBookId,
                                             @PathVariable final String contactId) {
         contactRepository.deleteContactByIdAndAddressBook(addressBookId, contactId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/addressBooks/contacts")
+    @GetMapping(value = "/contacts")
     public ResponseEntity getUniqueContacts() {
         List<Contact> contacts = contactRepository.getUniqueContactsInAllAddressBooks();
         return new ResponseEntity(contacts, HttpStatus.OK);

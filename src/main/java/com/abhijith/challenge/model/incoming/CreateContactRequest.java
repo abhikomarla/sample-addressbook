@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -13,12 +16,24 @@ public class CreateContactRequest implements Serializable {
 
     private String correlationId;
 
-    private String firstName;
+    @Valid
+    @NotNull
+    private ContactDto contact;
 
-    private String lastName;
+    @Data
+    public static class ContactDto implements Serializable {
 
-    private String mobileNumber;
+        @NotEmpty
+        @NotNull
+        private String firstName;
 
-    private String homePhone;
+        private String lastName;
+
+        @NotEmpty
+        @NotNull
+        private String mobileNumber;
+
+        private String homePhone;
+    }
 
 }

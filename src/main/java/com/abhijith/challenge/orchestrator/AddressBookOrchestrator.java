@@ -22,22 +22,22 @@ public class AddressBookOrchestrator {
 
     public ResponseEntity saveContact(final String addressBookId, final CreateContactRequest contactRequest) {
         CreateContactResponse createContactResponse = new CreateContactResponse();
+        createContactResponse.setCorrelationId(contactRequest.getCorrelationId());
         HttpStatus status = null;
-        if (contactRepository.findIfDuplicatePresent(addressBookId, contactRequest.getMobileNumber())) {
+        if (contactRepository.findIfDuplicatePresent(addressBookId, contactRequest.getContact().getMobileNumber())) {
             status = HttpStatus.CONFLICT;
             createContactResponse.setMessage("Duplicate contact found");
             createContactResponse.setCode(HttpStatus.CONFLICT.value());
         } else {
             Contact contact = new Contact();
-            contact.setFirstName(contactRequest.getFirstName());
-            contact.setLastName(contactRequest.getLastName());
-            contact.setHomePhone(contactRequest.getHomePhone());
-            contact.setMobileNumber(contactRequest.getMobileNumber());
+            contact.setFirstName(contactRequest.getContact().getFirstName());
+            contact.setLastName(contactRequest.getContact().getLastName());
+            contact.setHomePhone(contactRequest.getContact().getHomePhone());
+            contact.setMobileNumber(contactRequest.getContact().getMobileNumber());
             contact.setAddressBookId(addressBookId);
             contactRepository.save(contact);
             status = HttpStatus.CREATED;
             createContactResponse.setMessage("Successfully created");
-            createContactResponse.getParams().put("contactId", contact.getId());
             String link = "/addressBooks/" + addressBookId + "/contacts/" + contact.getId();
             createContactResponse.getParams().put("link", link);
         }

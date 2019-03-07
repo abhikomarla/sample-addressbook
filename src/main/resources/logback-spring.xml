@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!--
+  *****************************************************************************
+  This file is the default logback-spring configuration for Telstra Microservice
+  that are based on the java-microservice-core.
+  It should be all the logging configuration that is needed for most 
+  micro services
+  Please see the wiki for more detail.
+  ***************************************************************************** 
+  -->
+  <!-- If logback.xml is located on the path this file will not be used. Only use logback-spring.xml -->
+
+  <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+  <!-- DEVELOPER LOGGING CONFIG - use this while you are developing -->
+  <springProfile name="humanLogging">
+    <logger name="com.abhijith.challenge" level="DEBUG" />
+    <logger name="org.springframework.boot" level="INFO" />
+  </springProfile>
+
+  <!-- TOP LOGGING CONFIG (this will be the default unless someone specifies human friendly logging) -->
+  <springProfile name="!humanLogging">
+
+    <appender name="CORE-EVENT-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>EVENT>%msg%n</pattern>
+      </encoder>
+    </appender>
+
+    <!-- 
+    Loggers 
+    -->
+    <logger name="org.springframework.boot" level="INFO" additivity="false">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="com.abhijith.challenge" level="DEBUG" additivity="false">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- 
+    Root 
+    -->
+    <root level="WARN">
+      <appender-ref ref="CONSOLE" />
+    </root>
+  </springProfile>
+
+</configuration>
