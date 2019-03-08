@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -15,12 +14,24 @@ import java.util.UUID;
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Contact implements Serializable {
 
-    public Contact() {
-        this.id = UUID.randomUUID().toString();
+    protected Contact() { }
+
+    public Contact(final String firstName, final String lastName,
+                   final String mobileNumber, final String homePhone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mobileNumber = mobileNumber;
+        this.homePhone = homePhone;
+
+        //to make sure the id is same for a same combination of first name and mobile number
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(firstName).append(mobileNumber);
+        this.id = Integer.toString(Math.abs(buffer.toString().hashCode()));
+        System.out.println("Hashcode :: " + this.id);
     }
 
     @Id
-    @Column (updatable = false, nullable = false)
+    @Column
     private String id;
 
     @Column
@@ -34,9 +45,5 @@ public class Contact implements Serializable {
 
     @Column
     private String homePhone;
-
-    @Column
-    @JoinColumn(foreignKey = @ForeignKey (name = "addressbook_id"))
-    private String addressBookId;
 
 }

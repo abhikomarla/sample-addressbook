@@ -20,7 +20,9 @@ public class ContactRepositoryImpl implements ContactRepositoryCustom {
     @Override
     public List<Contact> findAllByAddressId(final String addressBookId) {
         TypedQuery<Contact> query = entityManager.createQuery("SELECT c FROM contact c where "
-                + "c.addressBookId = :addressBookId", Contact.class);
+                + "c.id in (SELECT m.addressContactMappingId.contactId FROM "
+                + "addresscontactmapping m where m.addressContactMappingId.addressBookId = :addressBookId)",
+                Contact.class);
         query.setParameter("addressBookId", addressBookId);
         return query.getResultList();
     }
@@ -28,7 +30,9 @@ public class ContactRepositoryImpl implements ContactRepositoryCustom {
     @Override
     public Contact findContactByIdAndAddressBook(final String addressBookId, final String contactId) {
         TypedQuery<Contact> query = entityManager.createQuery("SELECT c FROM contact c where "
-                + "c.addressBookId = :addressBookId AND c.id = :contactId", Contact.class);
+                + "c.id = (SELECT m.addressContactMappingId.contactId FROM "
+                + "addresscontactmapping m where m.addressContactMappingId.addressBookId = :addressBookId "
+                + "AND m.addressContactMappingId.contactId = :contactId)", Contact.class);
         query.setParameter("addressBookId", addressBookId);
         query.setParameter("contactId", contactId);
 
@@ -37,25 +41,18 @@ public class ContactRepositoryImpl implements ContactRepositoryCustom {
 
     @Override
     public void deleteContactByIdAndAddressBook(final String addressBookId, final String contactId) {
-        Query query = entityManager.createQuery("DELETE FROM contact where "
-                + "addressBookId = :addressBookId AND id = :contactId");
+        Query query = entityManager.createQuery("DELETE FROM addresscontactmapping where "
+                + "addressContactMappingId.addressBookId = :addressBookId "
+                + "AND addressContactMappingId.contactId = :contactId");
         query.setParameter("addressBookId", addressBookId);
         query.setParameter("contactId", contactId);
         query.executeUpdate();
     }
 
     @Override
-    public boolean findIfDuplicatePresent(final String addressBookId, final String mobileNumber) {
-        TypedQuery<Contact> query = entityManager.createQuery("SELECT c FROM contact c where "
-                + "c.addressBookId = :addressBookId and c.mobileNumber = :mobileNumber", Contact.class);
-        query.setParameter("addressBookId", addressBookId);
-        query.setParameter("mobileNumber", mobileNumber);
-        return !query.getResultList().isEmpty();
-    }
-
-    @Override
     public List<Contact> getUniqueContactsInAllAddressBooks() {
-        TypedQuery<Contact> query = entityManager.createQuery("select distinct on mobileNumber * from contact",
+        TypedQuery<Contact> query = entityManager.createQuery("SELECT c FROM contact c WHERE "
+                + "c.id in (SELECT DISTINCT m.addressContactMappingId.contactId from addresscontactmapping m)",
                 Contact.class);
         return query.getResultList();
     }

@@ -6,11 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity (name = "addressbook")
@@ -27,10 +23,6 @@ public class AddressBook implements Serializable {
 
     @Column
     private String description;
-
-    @OneToMany
-    @JoinColumn(name = "CONTACT_ID")
-    private List<Contact> contacts = new ArrayList<>();
 
     public AddressBook(final String id, final String name,
                        final String description) {

@@ -56,7 +56,7 @@ public class ApplicationRestController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/contacts")
+    @GetMapping(value = "/unique-contacts")
     public ResponseEntity getUniqueContacts() {
         List<Contact> contacts = contactRepository.getUniqueContactsInAllAddressBooks();
         return new ResponseEntity(contacts, HttpStatus.OK);
